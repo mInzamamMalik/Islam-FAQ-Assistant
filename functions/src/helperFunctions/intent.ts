@@ -14,7 +14,7 @@ export interface response {
     messages: Object[],
     parameters:Object[],
     resetContexts:boolean
-}
+} 
 
 export function createIntent(name:string, userSays:userSay[],responses:response[], events:any[], fallbackIntent:boolean = false, webhookForSlotFilling:boolean = false, webhookUsed:boolean = false, contexts:string[] = [] ) {
 
