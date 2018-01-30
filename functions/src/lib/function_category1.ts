@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _cors from 'cors';
 import firestore from './../db'
+import { createIntent } from './../helperFunctions/intent'
 
 var cors = _cors({ origin: true });// set these options appropriately According to your case,
 // see document: https://www.npmjs.com/package/cors#configuration-options
@@ -9,11 +10,18 @@ var cors = _cors({ origin: true });// set these options appropriately According 
 
 
 // http example
-export const addMessage = functions.https.onRequest((req, res) => {
-    const original = req.query.text;
-    admin.database().ref('/messages').push({ original: original }).then(snapshot => {
-        res.redirect(303, snapshot.ref);
-    });
+export const createAnIntent = functions.https.onRequest((req, res) => {
+    let intentBody = req.body;
+    console.log("createAnIntent: request.body", intentBody)
+    createIntent(intentBody.name, intentBody.userSays, intentBody.responses).then(()=>{
+        console.log('successfully created intent')
+    }).catch((err)=>{
+        console.log('err occurred in creating intent',err)
+    })
+    // const original = req.query.text;
+    // admin.database().ref('/messages').push({ original: original }).then(snapshot => {
+    //     res.redirect(303, snapshot.ref);
+    // });
 });
 
 //databse trigger example

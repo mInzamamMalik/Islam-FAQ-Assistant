@@ -24,7 +24,7 @@ export function makeDevEntity(entityName: string, entries: entityEntry[]) {
                 "Authorization": access_token
             },
             json: json
-        }, function (error: any, response: any, body: any) {
+        }, (error: any, response: any, body: any) => {
             // console.log(`on ${access_token} making entity ${entityName}`);
             // console.log(`request body:`, json, ` response: `, response.body);
 
@@ -53,7 +53,7 @@ export function makeUserEntity(sessionId: string, entityName: string, entries: e
                 "name": entityName,
                 "entries": entries
             }
-        }, function (error: any, response: any, body: any) {
+        }, (error: any, response: any, body: any) => {
 
             console.log(`on ${access_token} making entity ${entityName} on session ${sessionId} response: `, response.body);
             //checking if response was success
